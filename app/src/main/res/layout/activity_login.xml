@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light"
-    tools:context=".MainActivity" >
-
-    <EditText
-        android:id="@+id/username_edittext_register"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@android:color/background_light"
-        android:ems="10"
-        android:hint="Username"
-        android:padding="16dp"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@android:color/holo_green_light">
 
     <EditText
         android:id="@+id/email_edittext_register"
@@ -32,10 +14,7 @@
         android:ems="10"
         android:hint="Email"
         android:padding="16dp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/username_edittext_register"
-        app:layout_constraintStart_toStartOf="@+id/username_edittext_register"
-        app:layout_constraintTop_toBottomOf="@+id/username_edittext_register" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/password_edittext_register"
@@ -56,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Register"
+        android:text="Login"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="@+id/password_edittext_register"
         app:layout_constraintStart_toStartOf="@+id/password_edittext_register"
@@ -70,8 +49,9 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="Already have an account?"
+        android:text="Back to Register"
         app:layout_constraintEnd_toEndOf="@+id/register_button_register"
         app:layout_constraintStart_toStartOf="@+id/register_button_register"
         app:layout_constraintTop_toBottomOf="@+id/register_button_register" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
