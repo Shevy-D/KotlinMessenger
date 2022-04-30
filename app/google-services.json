@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1004225254726",
+    "firebase_url": "https://kotlin-messenger-5f52a-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "kotlin-messenger-5f52a",
     "storage_bucket": "kotlin-messenger-5f52a.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1004225254726-tvnobrh3aa6njqonpkfkcdc1takf6l39.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shevy.kotlinmessenger",
+            "certificate_hash": "81d094266421d1eaef17d1bf06f8f6d82f4788b5"
+          }
+        },
         {
           "client_id": "1004225254726-gemnhktluu757a08inhd2q3kb4iq49r6.apps.googleusercontent.com",
           "client_type": 3
