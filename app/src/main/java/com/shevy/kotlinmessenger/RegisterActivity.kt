@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -109,24 +110,25 @@ class RegisterActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.w("Register", "Successfully uploaded image: ${it.metadata?.path}")
 
-                ref.downloadUrl.addOnSuccessListener {
-                    Log.w("Register", "File location: $it")
+                ref.downloadUrl.addOnSuccessListener { task ->
+                    Log.w("Register", "File location: $task")
 
-                    saveUserToFirebaseDatabase(it.toString())
+                    saveUserToFirebaseDatabase(task.toString())
                 }
+            }
+            .addOnFailureListener{
+                //do some logging here
             }
     }
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val database = Firebase.database.reference
-        //val ref = database.child("/users/").child("$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        val user = User(uid,
-            findViewById<EditText>(R.id.username_edittext_register).text.toString(),
-            profileImageUrl)
+        val username = findViewById<EditText>(R.id.username_edittext_register).text.toString()
+        val user = User(uid, username, profileImageUrl)
 
-        database.child("users").child("$uid").setValue(user)
+        ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("Register", "Finally we saves the user to Firebase Database")
             }
