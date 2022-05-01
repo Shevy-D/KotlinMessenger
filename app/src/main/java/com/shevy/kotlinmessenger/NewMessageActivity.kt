@@ -1,5 +1,6 @@
 package com.shevy.kotlinmessenger
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -39,6 +40,14 @@ class NewMessageActivity : AppCompatActivity() {
                     adapter.add(UserItem(user))
                     }
                 }
+                adapter.setOnItemClickListener { item, view ->
+
+                    val intent = Intent(this@NewMessageActivity, ChatLogActivity::class.java)
+                    startActivity(intent)
+
+                    finish()
+                }
+                
                 val rcView = findViewById<RecyclerView>(R.id.recyclerview_newmessage)
                 rcView.adapter = adapter
             }
@@ -46,7 +55,6 @@ class NewMessageActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
     }
 }

@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinMessenger">
         <activity
+            android:name=".ChatLogActivity"
+            android:exported="true" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LatestMessagesActivity" />
+        </activity>
+        <activity
             android:name=".LatestMessagesActivity"
             android:exported="true">
             <intent-filter>
