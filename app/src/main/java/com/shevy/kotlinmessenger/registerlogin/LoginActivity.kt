@@ -1,4 +1,4 @@
-package com.shevy.kotlinmessenger
+package com.shevy.kotlinmessenger.registerlogin
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.shevy.kotlinmessenger.R
 
 class LoginActivity: AppCompatActivity() {
 

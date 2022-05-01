@@ -1,8 +1,7 @@
-package com.shevy.kotlinmessenger
+package com.shevy.kotlinmessenger.registerlogin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,9 +12,11 @@ import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.shevy.kotlinmessenger.R
+import com.shevy.kotlinmessenger.messages.LatestMessagesActivity
+import com.shevy.kotlinmessenger.models.User
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -137,8 +138,4 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
             }
     }
-}
-
-class User(val uid: String, val username: String, val profileImageUrl: String) {
-    constructor() : this("", "", "")
 }

@@ -1,4 +1,4 @@
-package com.shevy.kotlinmessenger
+package com.shevy.kotlinmessenger.messages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.shevy.kotlinmessenger.R
+import com.shevy.kotlinmessenger.models.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -27,6 +29,10 @@ class NewMessageActivity : AppCompatActivity() {
         fetchUsers()
     }
 
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
+
     private fun fetchUsers() {
         val ref = FirebaseDatabase.getInstance().getReference("/users/")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -34,7 +40,7 @@ class NewMessageActivity : AppCompatActivity() {
                 val adapter = GroupieAdapter()
 
                 snapshot.children.forEach {
-                    Log.d("NewMessage", "${it.toString()}")
+                    Log.d("NewMessage", "$it")
                     val user = it.getValue(User::class.java)
                     if (user != null) {
                     adapter.add(UserItem(user))
@@ -42,7 +48,11 @@ class NewMessageActivity : AppCompatActivity() {
                 }
                 adapter.setOnItemClickListener { item, view ->
 
+                    val userItem = item as UserItem
+
                     val intent = Intent(this@NewMessageActivity, ChatLogActivity::class.java)
+                    //intent.putExtra(USER_KEY, item.user.username)
+                    intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
 
                     finish()
@@ -59,7 +69,7 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(private val user: User) : Item<GroupieViewHolder>() {
+class UserItem(val user: User) : Item<GroupieViewHolder>() {
 
     override fun bind(viewHolder: GroupieViewHolder, p1: Int) {
         val name = viewHolder.itemView.findViewById<TextView>(R.id.textView_user_row_new_message)
