@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.shevy.kotlinmessenger.R
 import com.shevy.kotlinmessenger.models.ChatMessage
 import com.shevy.kotlinmessenger.models.User
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -63,7 +64,9 @@ class ChatLogActivity : AppCompatActivity() {
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
                         adapter.add(ChatFromItem(chatMessage.text))
                     } else {
-                        adapter.add(ChatToItem(chatMessage.text))
+                        val toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+
+                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     }
                 }
             }
@@ -106,16 +109,6 @@ class ChatLogActivity : AppCompatActivity() {
                 Log.d("ChatLogAct", "Save our chat message: ${reference.key}")
             }
     }
-
-    private fun setupDummyData() {
-        val adapter = GroupieAdapter()
-        val chatLog = findViewById<RecyclerView>(R.id.recyclerview_chat_log)
-
-        adapter.add(ChatFromItem("FROM MESSAGE"))
-        adapter.add(ChatToItem("TO MESSAGE\n TO MESSAGE"))
-
-        chatLog.adapter = adapter
-    }
 }
 
 class ChatFromItem(val text: String) : Item<GroupieViewHolder>() {
@@ -128,9 +121,14 @@ class ChatFromItem(val text: String) : Item<GroupieViewHolder>() {
     }
 }
 
-class ChatToItem(val text: String) : Item<GroupieViewHolder>() {
+class ChatToItem(val text: String, val user: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.textView_to_row.text = text
+
+        // load our user image
+        val uri = user.profileImageUrl
+        val targetImageView = viewHolder.itemView.imageView_chat_to_row
+        Picasso.get().load(uri).into(targetImageView)
     }
 
     override fun getLayout(): Int {
