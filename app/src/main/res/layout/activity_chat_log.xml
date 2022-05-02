@@ -41,8 +41,10 @@
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/holo_green_light"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/edittext_chat_log"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/chat_from_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,10 @@ class ChatLogActivity : AppCompatActivity() {
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         supportActionBar?.title = user?.username
 
+        setupDummyData()
+    }
+
+    private fun setupDummyData() {
         val adapter = GroupieAdapter()
         val chatLog = findViewById<RecyclerView>(R.id.recyclerview_chat_log)
 
