@@ -41,7 +41,6 @@ class ChatLogActivity : AppCompatActivity() {
         toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         supportActionBar?.title = toUser?.username
 
-        //setupDummyData()
         listenForMessages()
 
         val sendBtn = findViewById<Button>(R.id.send_button_chat_log)
@@ -106,8 +105,10 @@ class ChatLogActivity : AppCompatActivity() {
         if (fromId == null) return
 
         //val reference = FirebaseDatabase.getInstance().getReference("/messages/").push()
-        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
-        val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
+        val reference =
+            FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toReference =
+            FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         val chatMessage =
             ChatMessage(reference.key!!, text, fromId, toId!!, System.currentTimeMillis() / 1000)
@@ -120,6 +121,14 @@ class ChatLogActivity : AppCompatActivity() {
                 rcView.scrollToPosition(adapter.itemCount - 1)
             }
         toReference.setValue(chatMessage)
+
+        val latestReferenceMessage =
+            FirebaseDatabase.getInstance().getReference("/latest_messages/$fromId/$toId")
+            latestReferenceMessage.setValue(chatMessage)
+
+        val latestMessageToRef =
+            FirebaseDatabase.getInstance().getReference("/latest_messages/$toId/$fromId")
+        latestMessageToRef.setValue(chatMessage)
     }
 }
 
